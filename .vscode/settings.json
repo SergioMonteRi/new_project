@@ -1,0 +1,18 @@
+{
+    "python.linting.enable": true,
+    "python.linting.pylintEnabled": true,
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
+    "yaml.schemas": {
+        "file:///Users/sergio/.vscode/extensions/continue.continue-1.2.14-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "https://www.schemastore.org/pre-commit-config.json": "file:///Users/sergio/Workspace/courses/python/new_project/.pre-commit-config.yaml"
+    },
+}
