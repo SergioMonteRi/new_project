@@ -13,5 +13,6 @@ pre_commit==4.6.2
 pylint==4.0.8
 python-discovery==1.6.0
 PyYAML==6.0.3
+ruff==0.16.8
 tomlkit==0.15.1
 virtualenv==21.7.10
