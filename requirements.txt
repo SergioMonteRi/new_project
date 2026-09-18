@@ -14,5 +14,7 @@ pylint==4.0.8
 python-discovery==1.6.0
 PyYAML==6.0.3
 ruff==0.16.8
+SQLAlchemy==2.0.54
 tomlkit==0.15.1
+typing_extensions==4.16.0
 virtualenv==21.7.10
