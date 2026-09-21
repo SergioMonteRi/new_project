@@ -13,3 +13,17 @@ class PetsRepository:
     def list_pets(self) -> List:
         with self.__db_connection as session:
             return session.scalars(select(PetsTable)).all()
+
+    def delete_pet(self, pet_id: int) -> bool:
+        with self.__db_connection as session:
+            stmt = select(PetsTable).where(PetsTable.id == pet_id)
+
+            current_pet = session.scalar(stmt)
+
+            if current_pet is None:
+                return False
+
+            session.delete(current_pet)
+            session.commit()
+
+            return True
