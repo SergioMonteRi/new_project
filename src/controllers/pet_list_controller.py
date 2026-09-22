@@ -3,8 +3,10 @@
 from src.models.sqlite.entities.pets import PetsTable
 from src.models.sqlite.interfaces.pets_repository import PetsRepositoryInterface
 
+from .interfaces.pet_list_controller import PetListControllerInterface
 
-class PetListController:
+
+class PetListController(PetListControllerInterface):
     def __init__(self, pet_repository: PetsRepositoryInterface):
         self.__pet_repository = pet_repository
 

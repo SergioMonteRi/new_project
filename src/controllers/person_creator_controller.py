@@ -1,14 +1,15 @@
 import re
-from typing import Dict
 
 from src.models.sqlite.interfaces.people_repository import PeopleRepositoryInterface
 
+from .interfaces.person_creator_controller import PersonCreatorControllerInterface
 
-class PersonCreatorController:
+
+class PersonCreatorController(PersonCreatorControllerInterface):
     def __init__(self, people_repository: PeopleRepositoryInterface):
         self.__people_repository = people_repository
 
-    def create_person(self, person_data: Dict) -> Dict:
+    def create_person(self, person_data: dict) -> dict:
         first_name = person_data["first_name"]
         last_name = person_data["last_name"]
         age = person_data["age"]
@@ -32,5 +33,5 @@ class PersonCreatorController:
     ) -> None:
         self.__people_repository.insert_person(first_name, last_name, age, pet_id)
 
-    def __format_response(self, person_info: Dict) -> Dict:
+    def __format_response(self, person_info: dict) -> dict:
         return {"data": {"type": "Person", "count": 1, "attributes": person_info}}
