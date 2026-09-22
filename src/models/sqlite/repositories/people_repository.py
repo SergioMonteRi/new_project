@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
+from src.models.sqlite.dto.person_with_pet import PersonWithPet
 from src.models.sqlite.entities.people import PeopleTable
 from src.models.sqlite.entities.pets import PetsTable
 from src.models.sqlite.interfaces.people_repository import PeopleRepositoryInterface
@@ -27,7 +28,7 @@ class PeopleRepository(PeopleRepositoryInterface):
                 session.rollback()
                 raise
 
-    def get_person(self, person_id: int):
+    def get_person(self, person_id: int) -> PersonWithPet | None:
         with self.__db_connection as session:
             stmt = (
                 select(
