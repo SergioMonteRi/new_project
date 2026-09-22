@@ -26,6 +26,6 @@ class TestPersonFinderController:
 
         pet_repository.list_pets.assert_called_once()
 
-        assert response["data"]["type"] == "Pets"
+        assert response["data"]["type"] == "Pet"
         assert response["data"]["count"] == 2
         assert response["data"]["attributes"][0]["name"] == "Toto"
