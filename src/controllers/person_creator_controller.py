@@ -25,7 +25,7 @@ class PersonCreatorController:
         non_valid_characters = re.compile(r"[^a-zA-Z]")
 
         if non_valid_characters.search(name):
-            raise Exception
+            raise Exception("Invalid name")
 
     def __insert_person_in_db(
         self, first_name: str, last_name: str, age: int, pet_id: int
