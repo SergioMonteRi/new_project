@@ -7,10 +7,12 @@ class TestPetDeleteController:
     def test_delete_pet(self):
         pet_repository = Mock()
 
-        pet_repository.delete_pet.return_value = None
+        pet_repository.delete_pet.return_value = True
 
         controller = PetDeleteController(pet_repository)
 
-        controller.delete_pet(1)
+        response = controller.delete_pet(1)
 
         pet_repository.delete_pet.assert_called_once_with(1)
+
+        assert response is True

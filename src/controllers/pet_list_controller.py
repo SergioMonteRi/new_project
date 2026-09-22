@@ -1,3 +1,5 @@
+# pylint: disable=redefined-outer-name
+
 from src.models.sqlite.entities.pets import PetsTable
 from src.models.sqlite.interfaces.pets_repository import PetsRepositoryInterface
 
