@@ -1,3 +1,4 @@
+from src.exceptions.exception_types.http_not_found import HttpNotFoundError
 from src.models.sqlite.dto.person_with_pet import PersonWithPet
 from src.models.sqlite.interfaces.people_repository import PeopleRepositoryInterface
 
@@ -17,7 +18,7 @@ class PersonFinderController(PersonFinderControllerInterface):
         person = self.__people_repository.get_person(person_id)
 
         if not person:
-            raise Exception("Person not found")
+            raise HttpNotFoundError("Person not found")
 
         return person
 
