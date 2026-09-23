@@ -1,7 +1,7 @@
 from src.controllers.interfaces.pet_list_controller import PetListControllerInterface
 
-from .http_types.http_request import HttpResponse
-from .http_types.http_response import HttpRequest
+from .http_types.http_request import HttpRequest
+from .http_types.http_response import HttpResponse
 from .interfaces.view_interface import ViewInterface
 
 
