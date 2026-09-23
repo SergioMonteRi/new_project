@@ -32,8 +32,10 @@ class PeopleRepository(PeopleRepositoryInterface):
         with self.__db_connection as session:
             stmt = (
                 select(
+                    PeopleTable.id,
                     PeopleTable.first_name,
                     PeopleTable.last_name,
+                    PeopleTable.age,
                     PetsTable.name.label("pet_name"),
                     PetsTable.type.label("pet_type"),
                 )
@@ -41,6 +43,6 @@ class PeopleRepository(PeopleRepositoryInterface):
                 .where(PeopleTable.id == person_id)
             )
 
-            person = session.execute(stmt).one_or_none
+            person = session.execute(stmt).one_or_none()
 
             return person
