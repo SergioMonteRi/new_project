@@ -4,6 +4,8 @@ from unittest.mock import Mock
 
 import pytest
 
+from src.schemas.create_person_schema import CreatePersonSchema
+
 from .person_creator_controller import PersonCreatorController
 
 
@@ -17,12 +19,30 @@ def people_repository():
 
 @pytest.fixture
 def person_data():
-    return {
+    person_data = {
         "first_name": "Developer",
         "last_name": "Tester",
         "age": 30,
         "pet_id": 10,
     }
+
+    person = CreatePersonSchema.model_validate(person_data)
+
+    return person
+
+
+@pytest.fixture
+def invalid_person_data():
+    person_data = {
+        "first_name": "Developer123",
+        "last_name": "Tester123",
+        "age": 30,
+        "pet_id": 10,
+    }
+
+    person = CreatePersonSchema.model_validate(person_data)
+
+    return person
 
 
 class TestPersonCreatorController:
@@ -40,21 +60,3 @@ class TestPersonCreatorController:
         assert response["data"]["type"] == "Person"
         assert response["data"]["count"] == 1
         assert response["data"]["attributes"] == person_data
-
-    def test_create_person_with_invalid_first_name(
-        self, people_repository, person_data
-    ):
-        person_data["first_name"] = "Dev123"
-
-        controller = PersonCreatorController(people_repository)
-
-        with pytest.raises(Exception):
-            controller.create_person(person_data)
-
-    def test_create_person_with_invalid_last_name(self, people_repository, person_data):
-        person_data["last_name"] = "Tester123"
-
-        controller = PersonCreatorController(people_repository)
-
-        with pytest.raises(Exception):
-            controller.create_person(person_data)

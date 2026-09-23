@@ -1,6 +1,12 @@
 from flask import Flask
 from flask_cors import CORS
 
+from src.exceptions.exception_types.http_unprocessable_entity import (
+    HttpUnprocessableEntityError,
+)
+from src.exceptions.handlers.http_error_handler import (
+    handle_unprocessable_entity,
+)
 from src.main.routes.person_routes import person_routes_bp
 from src.main.routes.pets_routes import pet_routes_bp
 from src.models.sqlite.settings.connection import db_connection_handler
@@ -13,3 +19,8 @@ CORS(app)
 
 app.register_blueprint(pet_routes_bp)
 app.register_blueprint(person_routes_bp)
+
+app.register_error_handler(
+    HttpUnprocessableEntityError,
+    handle_unprocessable_entity,
+)
