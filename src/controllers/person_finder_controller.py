@@ -1,3 +1,4 @@
+from src.exceptions.exception_types.http_bad_request import HttpBadRequestError
 from src.exceptions.exception_types.http_not_found import HttpNotFoundError
 from src.models.sqlite.dto.person_with_pet import PersonWithPet
 from src.models.sqlite.interfaces.people_repository import PeopleRepositoryInterface
@@ -10,6 +11,9 @@ class PersonFinderController(PersonFinderControllerInterface):
         self.__people_repository = people_repository
 
     def find_person_by_id(self, person_id: int) -> dict:
+        if person_id <= 0:
+            raise HttpBadRequestError(message="Person id must be greater than zero")
+
         person = self.__find_person_in_db(person_id)
 
         return self.__format_response(person)

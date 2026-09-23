@@ -24,4 +24,10 @@ class PersonCreatorController(PersonCreatorControllerInterface):
         self.__people_repository.insert_person(first_name, last_name, age, pet_id)
 
     def __format_response(self, person_info: CreatePersonSchema) -> dict:
-        return {"data": {"type": "Person", "count": 1, "attributes": person_info}}
+        return {
+            "data": {
+                "type": "Person",
+                "count": 1,
+                "attributes": person_info.model_dump(),
+            }
+        }

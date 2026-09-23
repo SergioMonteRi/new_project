@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
 
+from src.exceptions.exception_types.http_bad_request import HttpBadRequestError
+from src.exceptions.exception_types.http_not_found import HttpNotFoundError
 from src.exceptions.exception_types.http_unprocessable_entity import (
     HttpUnprocessableEntityError,
 )
 from src.exceptions.handlers.http_error_handler import (
-    handle_unprocessable_entity,
+    handle_http_error,
 )
 from src.main.routes.person_routes import person_routes_bp
 from src.main.routes.pets_routes import pet_routes_bp
@@ -22,5 +24,15 @@ app.register_blueprint(person_routes_bp)
 
 app.register_error_handler(
     HttpUnprocessableEntityError,
-    handle_unprocessable_entity,
+    handle_http_error,
+)
+
+app.register_error_handler(
+    HttpNotFoundError,
+    handle_http_error,
+)
+
+app.register_error_handler(
+    HttpBadRequestError,
+    handle_http_error,
 )

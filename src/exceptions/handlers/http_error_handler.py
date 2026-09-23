@@ -1,15 +1,15 @@
 from flask import jsonify
 
-from src.exceptions.exception_types.http_unprocessable_entity import (
-    HttpUnprocessableEntityError,
-)
+from src.exceptions.exception_types.http_error import HttpError
 
 
-def handle_unprocessable_entity(error: HttpUnprocessableEntityError):
-    return jsonify(
-        {
-            "error": error.name,
-            "message": error.message,
-            "errors": error.errors,
-        }
-    ), error.status_code
+def handle_http_error(error: HttpError):
+    response = {
+        "error": error.name,
+        "message": error.message,
+    }
+
+    if hasattr(error, "errors"):
+        response["errors"] = error.errors
+
+    return jsonify(response), error.status_code

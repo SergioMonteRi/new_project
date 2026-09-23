@@ -15,10 +15,7 @@ class PersonFinderView(ViewInterface):
         if http_request.param is None:
             raise ValueError("Person id is required")
 
-        person_id = http_request.param.get("person_id")
-
-        if person_id is None:
-            raise ValueError("Person id is required")
+        person_id = http_request.param["person_id"]
 
         response_body = self.__controller.find_person_by_id(person_id)
 
