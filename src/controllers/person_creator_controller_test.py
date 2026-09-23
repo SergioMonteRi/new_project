@@ -59,4 +59,4 @@ class TestPersonCreatorController:
 
         assert response["data"]["type"] == "Person"
         assert response["data"]["count"] == 1
-        assert response["data"]["attributes"] == person_data
+        assert response["data"]["attributes"] == person_data.model_dump()
